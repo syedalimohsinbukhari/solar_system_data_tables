@@ -44,3 +44,4 @@ app.*.map.json
 /android/app/release
 
 .idea/*
+/upload_images/video_recording.mp4

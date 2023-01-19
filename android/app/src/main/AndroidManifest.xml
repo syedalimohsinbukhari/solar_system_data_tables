@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="com.astrophysicsandpython.solar_system_data_tables">
    <application
-        android:label="solar_system_data_tables"
+        android:label="Solar System Data Tables"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
