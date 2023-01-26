@@ -29,8 +29,8 @@ class _OPClassState extends State<OPClass> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${widget.title}:\nObservational Properties",
-          textAlign: TextAlign.justify,
+          "${widget.title}:\nObservational Parameters",
+          textAlign: TextAlign.center,
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -64,7 +64,7 @@ class _OPClassState extends State<OPClass> {
               ),
             ),
             ExpandedButton(
-              text: 'Physical Properties',
+              text: 'Physical Parameters',
               button: 'PP${widget.title}',
             ),
             const ExpandedButton(

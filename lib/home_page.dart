@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 
 import 'components/utilities.dart';
@@ -21,64 +22,67 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: const <Widget>[
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Center(
-                child: Text(
-                  "Please select a celestial object.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+      body: DoubleBackToCloseApp(
+        snackBar: const SnackBar(content: Text('Tap again to exit the application.')),
+        child: SingleChildScrollView(
+          child: Column(
+            children: const <Widget>[
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    "Please select a celestial object.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
-            ),
-            ExpandedButton(
-              text: "Sun",
-              button: 'PPSun',
-            ),
-            ExpandedButton(
-              text: "Mercury",
-              button: 'PPMercury',
-            ),
-            ExpandedButton(
-              text: 'Venus',
-              button: 'PPVenus',
-            ),
-            ExpandedButton(
-              text: 'Earth',
-              button: 'PPEarth',
-            ),
-            ExpandedButton(
-              text: 'Mars',
-              button: 'PPMars',
-            ),
-            ExpandedButton(
-              text: 'Jupiter',
-              button: 'PPJupiter',
-            ),
-            ExpandedButton(
-              text: 'Saturn',
-              button: 'PPSaturn',
-            ),
-            ExpandedButton(
-              text: 'Uranus',
-              button: 'PPUranus',
-            ),
-            ExpandedButton(
-              text: 'Neptune',
-              button: 'PPNeptune',
-            ),
-            ExpandedButton(
-              text: 'Pluto',
-              button: 'PPPluto',
-            )
-          ],
+              ExpandedButton(
+                text: "Sun",
+                button: 'PPSun',
+              ),
+              ExpandedButton(
+                text: "Mercury",
+                button: 'PPMercury',
+              ),
+              ExpandedButton(
+                text: 'Venus',
+                button: 'PPVenus',
+              ),
+              ExpandedButton(
+                text: 'Earth',
+                button: 'PPEarth',
+              ),
+              ExpandedButton(
+                text: 'Mars',
+                button: 'PPMars',
+              ),
+              ExpandedButton(
+                text: 'Jupiter',
+                button: 'PPJupiter',
+              ),
+              ExpandedButton(
+                text: 'Saturn',
+                button: 'PPSaturn',
+              ),
+              ExpandedButton(
+                text: 'Uranus',
+                button: 'PPUranus',
+              ),
+              ExpandedButton(
+                text: 'Neptune',
+                button: 'PPNeptune',
+              ),
+              ExpandedButton(
+                text: 'Pluto',
+                button: 'PPPluto',
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -26,11 +26,11 @@ class _PPClassState extends State<PPClass> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${widget.title}:\nPhysical Properties",
-          textAlign: TextAlign.justify,
+          "${widget.title}:\nPhysical Parameters",
+          textAlign: TextAlign.center,
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10),
