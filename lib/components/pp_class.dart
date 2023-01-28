@@ -36,20 +36,32 @@ class _PPClassState extends State<PPClass> {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            const Padding(padding: EdgeInsets.all(5)),
+            const Padding(
+              padding: EdgeInsets.all(5),
+            ),
             Center(
               child: DataTable(
-                headingRowColor: MaterialStateProperty.all(const Color(0xffd3d3d3)),
+                headingRowColor: MaterialStateProperty.all(
+                  const Color(0xffd3d3d3),
+                ),
                 showBottomBorder: true,
                 border: TableBorder.all(),
                 columns: const [
-                  DataColumn(label: Expanded(child: TextCell(text: 'Quantity', isHead: true))),
                   DataColumn(
-                    label: Expanded(child: TextCell(text: 'Numeric\nValue', isHead: true)),
+                    label: Expanded(
+                      child: TextCell(text: 'Quantity', isHead: true),
+                    ),
                   ),
                   DataColumn(
-                    label: Expanded(child: TextCell(text: 'Unit', isHead: true)),
-                  )
+                    label: Expanded(
+                      child: TextCell(text: 'Numeric\nValue', isHead: true),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Expanded(
+                      child: TextCell(text: 'Unit', isHead: true),
+                    ),
+                  ),
                 ],
                 rows: [
                   getNewDataRow('Age', widget.age, 'yr'),

@@ -146,6 +146,7 @@ class TextCell extends StatelessWidget {
         style: TextStyle(
           fontSize: fontSize_,
           fontWeight: fontWeight_,
+          color: Colors.white,
         ),
       ),
     );
