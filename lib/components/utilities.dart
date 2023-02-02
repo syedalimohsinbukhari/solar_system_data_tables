@@ -115,6 +115,36 @@ DataRow getNewDataRow(String val1, double val2, String val3) {
   );
 }
 
+List getURL(String objectName) {
+  String urlConst = 'https://solarsystem.nasa.gov/resources/';
+  Map<String, String> fileName = {
+    'sun': 'Sun Shines in High-Energy X-rays',
+    'mercury': 'The Impressive Rays of Hokusai'
+  };
+
+  var urlList_ = {
+    'sun': 'URL: ${urlConst}381/${fileName[objectName]?.replaceAll(' ', '-').toLowerCase()}/\n\n',
+    'mercury': 'URL: ${urlConst}1053/${fileName[objectName]?.replaceAll(' ', '-').toLowerCase()}/'
+        '\n\n'
+  };
+  return [fileName[objectName], urlList_[objectName]];
+}
+
+String? toolTipExplanation(String objectName) {
+  var stuffList = getURL(objectName);
+
+  var list_ = {
+    'sun': 'Image Name: ${stuffList[0]}\n\n'
+        '${stuffList[1]}'
+        'Source:\nNASA/JPL-Caltech/Goddard Space Flight Center',
+    'mercury': 'Image Name: ${stuffList[0]}\n\n'
+        '${stuffList[1]}'
+        'Source:\nNASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington',
+  };
+
+  return list_[objectName];
+}
+
 String makeExponential(double val1) {
   if (10000 < val1.abs() || val1.abs() < 1e-2) {
     return val1.toStringAsExponential(4);
@@ -131,11 +161,11 @@ class TextCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var fontSize_ = 16.0;
+    var fontSize_ = 18.0;
     var fontWeight_ = FontWeight.bold;
 
     if (isHead == null) {
-      fontSize_ = 14;
+      fontSize_ = 16;
       fontWeight_ = FontWeight.normal;
     }
 

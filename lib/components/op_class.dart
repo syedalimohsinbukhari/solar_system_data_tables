@@ -37,11 +37,12 @@ class _OPClassState extends State<OPClass> {
       ),
       body: Container(
         constraints: const BoxConstraints.expand(),
-        // width: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/sun_bkg4.jpeg'),
-            fit: BoxFit.cover,
+            // Implement the network image stuff
+            // image: NetworkImage('assets/images/${widget.title.toLowerCase()}_bkg.jpg'),
+            image: AssetImage('assets/images/${widget.title.toLowerCase()}_bkg.jpg'),
+            fit: BoxFit.fitHeight,
           ),
         ),
         child: SingleChildScrollView(

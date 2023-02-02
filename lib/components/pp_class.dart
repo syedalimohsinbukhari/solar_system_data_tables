@@ -32,59 +32,82 @@ class _PPClassState extends State<PPClass> {
         centerTitle: true,
         // automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(5),
-            ),
-            Center(
-              child: DataTable(
-                headingRowColor: MaterialStateProperty.all(
-                  const Color(0xffd3d3d3),
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/${widget.title.toLowerCase()}_bkg.jpg'),
+            fit: BoxFit.fitHeight,
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(5),
+              ),
+              Center(
+                child: DataTable(
+                  headingRowColor: MaterialStateProperty.all(
+                    const Color(0xffd3d3d3),
+                  ),
+                  showBottomBorder: true,
+                  border: TableBorder.all(),
+                  columns: const [
+                    DataColumn(
+                      label: Expanded(
+                        child: TextCell(text: 'Quantity', isHead: true),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: TextCell(text: 'Numeric\nValue', isHead: true),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: TextCell(text: 'Unit', isHead: true),
+                      ),
+                    ),
+                  ],
+                  rows: [
+                    getNewDataRow('Age', widget.age, 'yr'),
+                    getNewDataRow('Mass', widget.mass, 'kg'),
+                    getNewDataRow('Radius', widget.radius, 'm'),
+                    // getNewDataRow('Temperature', temperature, 'K'),
+                    getNewDataRow('Volume', parameters[0], 'm^3'),
+                    getNewDataRow('Density', parameters[1], 'kg/m^3'),
+                    getNewDataRow('Surface\nArea', parameters[2], 'm^2'),
+                    getNewDataRow('Surface\nGravity', parameters[3], 'm/s^2'),
+                    getNewDataRow('Escape\nVelocity', parameters[4], "km/s")
+                  ],
                 ),
-                showBottomBorder: true,
-                border: TableBorder.all(),
-                columns: const [
-                  DataColumn(
-                    label: Expanded(
-                      child: TextCell(text: 'Quantity', isHead: true),
+              ),
+              ExpandedButton(
+                text: 'Observational Parameters',
+                button: 'OP${widget.title}',
+              ),
+              const ExpandedButton(
+                text: 'Home',
+                button: 'Home',
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Tooltip(
+                    showDuration: const Duration(milliseconds: 5000),
+                    message: toolTipExplanation(widget.title.toLowerCase()),
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: const Icon(
+                      Icons.info,
+                      color: Colors.white,
                     ),
                   ),
-                  DataColumn(
-                    label: Expanded(
-                      child: TextCell(text: 'Numeric\nValue', isHead: true),
-                    ),
-                  ),
-                  DataColumn(
-                    label: Expanded(
-                      child: TextCell(text: 'Unit', isHead: true),
-                    ),
-                  ),
-                ],
-                rows: [
-                  getNewDataRow('Age', widget.age, 'yr'),
-                  getNewDataRow('Mass', widget.mass, 'kg'),
-                  getNewDataRow('Radius', widget.radius, 'm'),
-                  // getNewDataRow('Temperature', temperature, 'K'),
-                  getNewDataRow('Volume', parameters[0], 'm^3'),
-                  getNewDataRow('Density', parameters[1], 'kg/m^3'),
-                  getNewDataRow('Surface\nArea', parameters[2], 'm^2'),
-                  getNewDataRow('Surface\nGravity', parameters[3], 'm/s^2'),
-                  getNewDataRow('Escape\nVelocity', parameters[4], "km/s")
                 ],
               ),
-            ),
-            ExpandedButton(
-              text: 'Observational Parameters',
-              button: 'OP${widget.title}',
-            ),
-            const ExpandedButton(
-              text: 'Home',
-              button: 'Home',
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
