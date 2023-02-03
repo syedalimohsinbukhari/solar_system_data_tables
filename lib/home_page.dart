@@ -1,5 +1,5 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'components/utilities.dart';
 
@@ -22,13 +22,21 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: DoubleBackToCloseApp(
-        snackBar: const SnackBar(content: Text('Tap again to exit the application.')),
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            // Implement the network image stuff
+            // image: NetworkImage('assets/images/${widget.title.toLowerCase()}_bkg.jpg'),
+            image: AssetImage('assets/images/viel_nebula.jpg'),
+            fit: BoxFit.fitHeight,
+          ),
+        ),
         child: SingleChildScrollView(
           child: Column(
-            children: const <Widget>[
-              Padding(
-                padding: EdgeInsets.all(8.0),
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.all(10.0),
                 child: Center(
                   child: Text(
                     "Please select a celestial object.",
@@ -36,51 +44,102 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: "Sun",
                 button: 'PPSun',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: "Mercury",
                 button: 'PPMercury',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Venus',
                 button: 'PPVenus',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Earth',
                 button: 'PPEarth',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Mars',
                 button: 'PPMars',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Jupiter',
                 button: 'PPJupiter',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Saturn',
                 button: 'PPSaturn',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Uranus',
                 button: 'PPUranus',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Neptune',
                 button: 'PPNeptune',
               ),
-              ExpandedButton(
+              const ExpandedButton(
                 text: 'Pluto',
                 button: 'PPPluto',
-              )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      // taken from https://stackoverflow.com/a/55983143/3212945
+                      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                    },
+                    icon: const Icon(
+                      Icons.exit_to_app,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Tooltip(
+                    showDuration: const Duration(milliseconds: 5000),
+                    message: toolTipExplanation('bkg'),
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: const Icon(
+                      Icons.info,
+                      color: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      launchURL(
+                        getImageURL('bkg'),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.open_in_browser,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Tooltip(
+                    showDuration: const Duration(milliseconds: 1000),
+                    message: 'Link copied to clipboard.',
+                    triggerMode: TooltipTriggerMode.tap,
+                    onTriggered: () {
+                      Clipboard.setData(
+                        ClipboardData(
+                          text: getImageURL('bkg'),
+                        ),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.copy,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

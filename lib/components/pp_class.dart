@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:solar_system_data_tables/components/utilities.dart';
+import 'package:solar_system_data_tables/home_page.dart';
 
 class PPClass extends StatefulWidget {
   const PPClass(
@@ -41,7 +43,6 @@ class _PPClassState extends State<PPClass> {
           ),
         ),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               const Padding(
@@ -84,17 +85,20 @@ class _PPClassState extends State<PPClass> {
                   ],
                 ),
               ),
-              ExpandedButton(
-                text: 'Observational Parameters',
-                button: 'OP${widget.title}',
-              ),
-              const ExpandedButton(
-                text: 'Home',
-                button: 'Home',
-              ),
+              const Padding(padding: EdgeInsets.all(2)),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+                    },
+                    icon: const Icon(
+                      Icons.home,
+                      color: Colors.white,
+                    ),
+                  ),
                   Tooltip(
                     showDuration: const Duration(milliseconds: 5000),
                     message: toolTipExplanation(widget.title.toLowerCase()),
@@ -103,6 +107,37 @@ class _PPClassState extends State<PPClass> {
                       Icons.info,
                       color: Colors.white,
                     ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      launchURL(
+                        getImageURL(widget.title.toLowerCase()),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.open_in_browser,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Tooltip(
+                    showDuration: const Duration(milliseconds: 1000),
+                    message: 'Link copied to clipboard.',
+                    triggerMode: TooltipTriggerMode.tap,
+                    onTriggered: () {
+                      Clipboard.setData(
+                        ClipboardData(
+                          text: getImageURL(widget.title.toLowerCase()),
+                        ),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.copy,
+                      color: Colors.white,
+                    ),
+                  ),
+                  ExpandedButton(
+                    text: 'Observational Parameters',
+                    button: 'OP${widget.title}',
                   ),
                 ],
               ),

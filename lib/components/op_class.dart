@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:solar_system_data_tables/components/utilities.dart';
+import 'package:solar_system_data_tables/home_page.dart';
 
 class OPClass extends StatefulWidget {
   const OPClass(
@@ -26,6 +28,11 @@ class _OPClassState extends State<OPClass> {
     double absoluteMagnitude =
         calculateApparentMagnitude(widget.meanApparentMagnitude, widget.distanceFromEarth);
 
+    // TODO: NetworkImage Implementation
+    // String urlConst =
+    //     'https://raw.githubusercontent.com/syedalimohsinbukhari/solar_system_data_tables/master'
+    //     '/assets/images';
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,13 +47,12 @@ class _OPClassState extends State<OPClass> {
         decoration: BoxDecoration(
           image: DecorationImage(
             // Implement the network image stuff
-            // image: NetworkImage('assets/images/${widget.title.toLowerCase()}_bkg.jpg'),
+            // image: NetworkImage('$urlConst/${widget.title.toLowerCase()}_bkg.jpg'),
             image: AssetImage('assets/images/${widget.title.toLowerCase()}_bkg.jpg'),
             fit: BoxFit.fitHeight,
           ),
         ),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               const Padding(
@@ -105,13 +111,61 @@ class _OPClassState extends State<OPClass> {
                   ],
                 ),
               ),
-              ExpandedButton(
-                text: 'Physical Parameters',
-                button: 'PP${widget.title}',
-              ),
-              const ExpandedButton(
-                text: 'Home',
-                button: 'Home',
+              const Padding(padding: EdgeInsets.all(10)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+                    },
+                    icon: const Icon(
+                      Icons.home,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Tooltip(
+                    showDuration: const Duration(milliseconds: 5000),
+                    message: toolTipExplanation(widget.title.toLowerCase()),
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: const Icon(
+                      Icons.info,
+                      color: Colors.white,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      launchURL(
+                        getImageURL(widget.title.toLowerCase()),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.open_in_browser,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Tooltip(
+                    showDuration: const Duration(milliseconds: 1000),
+                    message: 'Link copied to clipboard.',
+                    triggerMode: TooltipTriggerMode.tap,
+                    onTriggered: () {
+                      Clipboard.setData(
+                        ClipboardData(
+                          text: getImageURL(widget.title.toLowerCase()),
+                        ),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.copy,
+                      color: Colors.white,
+                    ),
+                  ),
+                  ExpandedButton(
+                    text: 'Physical Parameters',
+                    button: 'PP${widget.title}',
+                  ),
+                ],
               ),
             ],
           ),
